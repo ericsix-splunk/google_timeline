@@ -35,7 +35,7 @@ Additional Notes:
 
 
 Thanks to:
-	Nate McKurvey for the belay, the idea, and the tstats work.
+	Nate McKervey for the belay, the idea, and the tstats work.
 
 
 
