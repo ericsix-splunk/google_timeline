@@ -1,0 +1,6 @@
+<nav search_view="search" color="#0000FF">
+  <view name="about_this_app" default="true" />
+  <view name="google_locations_indexed_extractions"  />
+  <view name="google_locations_standard" />
+  <view name="search"  />
+</nav>

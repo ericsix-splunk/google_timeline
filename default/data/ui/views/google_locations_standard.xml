@@ -1,0 +1,170 @@
+<form>
+  <label>Google Timeline (Parsed JSON)</label>
+  <fieldset submitButton="false">
+    <input type="time" token="field_time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-6mon</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="text" token="field_accuracy" searchWhenChanged="true">
+      <label>Accuracy (lower is more accurate)</label>
+      <default>50</default>
+      <prefix>accuracy&lt;</prefix>
+    </input>
+    <input type="text" token="field_span" searchWhenChanged="true">
+      <label>Span</label>
+      <prefix>span=</prefix>
+      <default>10m</default>
+    </input>
+    <input type="text" token="field_interval" searchWhenChanged="true">
+      <label>Split trace interval (seconds)</label>
+      <default>7200</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <viz type="location_tracker_app.location_tracker">
+        <search>
+          <query>index=google sourcetype="json:google:location"  $field_accuracy$ | bin $field_span$ _time  | eval latitude = exact(latitude * 0.0000001)  | eval longitude = exact(longitude * 0.0000001)    | table _time,latitude,longitude</query>
+          <earliest>$field_time.earliest$</earliest>
+          <latest>$field_time.latest$</latest>
+        </search>
+        <option name="location_tracker_app.location_tracker.showTraces">1</option>
+        <option name="location_tracker_app.location_tracker.interval">$field_interval$</option>
+        <option name="location_tracker_app.location_tracker.tileSet">light_tiles</option>
+        <option name="location_tracker_app.location_tracker.staticIcon">space-shuttle</option>
+      </viz>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>US States Visited</title>
+      <single>
+        <search>
+          <query>index=google sourcetype="json:google:location" $field_accuracy$ | eval latitude = exact(latitude * 0.0000001) | eval longitude = exact(longitude * 0.0000001)   | lookup geo_us_states latitude longitude OUTPUT featureId AS us_state | stats dc(us_state) AS "States Visited"</query>
+          <earliest>$field_time.earliest$</earliest>
+          <latest>$field_time.latest$</latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">none</option>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">0</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Countries Visited</title>
+      <single>
+        <search>
+          <query>index=google sourcetype="json:google:location" $field_accuracy$ | eval latitude = exact(latitude * 0.0000001) | eval longitude = exact(longitude * 0.0000001)   | lookup geo_countries latitude longitude OUTPUT featureId AS country | stats dc(country) as Country</query>
+          <earliest>$field_time.earliest$</earliest>
+          <latest>$field_time.latest$</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">0</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <map>
+        <title>Countries Visited</title>
+        <search>
+          <query>index=google sourcetype="json:google:location"  | eval latitude = exact(latitude * 0.0000001) | eval longitude = exact(longitude * 0.0000001)   | lookup geo_countries latitude longitude OUTPUT featureId AS ks_countryname | stats count by ks_countryname | geom "geo_countries" featureIdfield="ks_countryname"</query>
+          <earliest>$field_time.earliest$</earliest>
+          <latest>$field_time.latest$</latest>
+        </search>
+        <option name="mapping.choroplethLayer.colorBins">5</option>
+        <option name="mapping.choroplethLayer.colorMode">categorical</option>
+        <option name="mapping.choroplethLayer.maximumColor">0xDB5800</option>
+        <option name="mapping.choroplethLayer.minimumColor">0x2F25BA</option>
+        <option name="mapping.choroplethLayer.neutralPoint">0</option>
+        <option name="mapping.choroplethLayer.shapeOpacity">0.75</option>
+        <option name="mapping.choroplethLayer.showBorder">1</option>
+        <option name="mapping.data.maxClusters">100</option>
+        <option name="mapping.drilldown">none</option>
+        <option name="mapping.map.center">(-0.35,131.66)</option>
+        <option name="mapping.map.panning">true</option>
+        <option name="mapping.map.scrollZoom">true</option>
+        <option name="mapping.map.zoom">2</option>
+        <option name="mapping.markerLayer.markerMaxSize">50</option>
+        <option name="mapping.markerLayer.markerMinSize">10</option>
+        <option name="mapping.markerLayer.markerOpacity">0.8</option>
+        <option name="mapping.showTiles">1</option>
+        <option name="mapping.tileLayer.maxZoom">7</option>
+        <option name="mapping.tileLayer.minZoom">0</option>
+        <option name="mapping.tileLayer.tileOpacity">1</option>
+        <option name="mapping.type">choropleth</option>
+        <option name="drilldown">none</option>
+      </map>
+    </panel>
+    <panel>
+      <map>
+        <title>United States - States Visited</title>
+        <search>
+          <query>index=google sourcetype="json:google:location"  | eval latitude = exact(latitude * 0.0000001) | eval longitude = exact(longitude * 0.0000001)   | lookup geo_us_states latitude longitude OUTPUT featureId AS ks_state | stats count by ks_state |geom "geo_us_states" featureIdField="ks_state"</query>
+          <earliest>$field_time.earliest$</earliest>
+          <latest>$field_time.latest$</latest>
+        </search>
+        <option name="mapping.choroplethLayer.colorBins">5</option>
+        <option name="mapping.choroplethLayer.colorMode">categorical</option>
+        <option name="mapping.choroplethLayer.maximumColor">0xDB5800</option>
+        <option name="mapping.choroplethLayer.minimumColor">0x2F25BA</option>
+        <option name="mapping.choroplethLayer.neutralPoint">0</option>
+        <option name="mapping.choroplethLayer.shapeOpacity">0.75</option>
+        <option name="mapping.choroplethLayer.showBorder">1</option>
+        <option name="mapping.data.maxClusters">100</option>
+        <option name="mapping.drilldown">none</option>
+        <option name="mapping.map.center">(35.6,-101.87)</option>
+        <option name="mapping.map.panning">true</option>
+        <option name="mapping.map.scrollZoom">true</option>
+        <option name="mapping.map.zoom">3</option>
+        <option name="mapping.markerLayer.markerMaxSize">50</option>
+        <option name="mapping.markerLayer.markerMinSize">10</option>
+        <option name="mapping.markerLayer.markerOpacity">0.8</option>
+        <option name="mapping.showTiles">1</option>
+        <option name="mapping.tileLayer.maxZoom">7</option>
+        <option name="mapping.tileLayer.minZoom">0</option>
+        <option name="mapping.tileLayer.tileOpacity">1</option>
+        <option name="mapping.type">choropleth</option>
+        <option name="drilldown">none</option>
+      </map>
+    </panel>
+    <panel>
+      <table>
+        <title>Countries Visited Most</title>
+        <search>
+          <query>index=google sourcetype="json:google:location" | eval latitude = exact(latitude * 0.0000001) | eval longitude = exact(longitude * 0.0000001)   | lookup geo_countries latitude longitude OUTPUT featureId AS ks_countryname | top ks_countryname | rename ks_countryname as Country | sort -count | fields - count,percent</query>
+          <earliest>$field_time.earliest$</earliest>
+          <latest>$field_time.latest$</latest>
+        </search>
+        <option name="wrap">undefined</option>
+        <option name="rowNumbers">undefined</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

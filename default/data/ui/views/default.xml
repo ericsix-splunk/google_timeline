@@ -1,0 +1,15 @@
+<dashboard>
+ <i><b>HTML panel</b></i> providing links to system reports.</p>
+    <ul>
+      <li>
+        <p><a href="@go?s=Errors in the last hour">Errors in the last hour</a></p>
+      </li>
+      <li>
+        <p><a href="@go?s=Indexing workload">Indexing workload</a></p>
+      </li>
+      <li>
+        <p><a href="@go?s=License Usage Data Cube">License Usage</a></p>
+      </li>
+    </ul>
+  </html>
+</dashboard>

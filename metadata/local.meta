@@ -1,0 +1,42 @@
+[]
+access = read : [ * ], write : [ * ]
+export = none
+version = 6.4.1
+modtime = 1467618485.433205000
+
+[app/ui]
+owner = admin
+version = 6.4.1
+modtime = 1467618506.845690000
+
+[app/launcher]
+owner = admin
+version = 6.4.1
+modtime = 1467618506.851553000
+
+[app/package/check_for_updates]
+version = 6.4.1
+modtime = 1467618506.934336000
+
+[views/default]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 6.4.1
+modtime = 1467619193.595501000
+
+[nav/default]
+version = 6.4.1
+modtime = 1467621144.249031000
+
+[views/google_locations_indexed_extractions]
+version = 6.4.1
+modtime = 1468991276.836491000
+
+[views/about_this_app]
+version = 6.4.1
+modtime = 1468994841.473297000
+
+[views/google_locations_standard]
+version = 6.4.1
+modtime = 1468991057.805333000
