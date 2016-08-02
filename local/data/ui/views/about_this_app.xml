@@ -43,7 +43,8 @@
     <font size="4"><pre>$ sed  -i -e '/^{/,+0 d;s/  \"locations\" : \[ {/{/; s/  }, /}\n/;$ d'   LocationHistory.json &amp;&amp;
       sed -i -e '$ s/  } ]/}/' LocationHistory.json</pre></font>
     From here, you can one shot the <b>LocationHistory.json</b> as the <b>json:google:location:indexedextractions</b> sourcetype.
-  </p>
+    </p><br></br>
+    <b>** Note this based on GNU sed. If you're on OSX or NON-GNU based *Nix, this wont work...</b>  
   <br></br>
   <br></br>
   <br></br>
