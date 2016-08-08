@@ -1,24 +1,26 @@
-================================================================
-=     Google Timeline View                              	=
-=     Author : Eric Six                                   	=
-=     Datasource : Google Timeline Export { json format }   	=
-=     *** https://www.google.com/maps/timeline
-=     							    	=
-=     Notes :                                               	=
-=     App has examples using indexed extractions, and       	=
-=     standard formatting. Review the props.conf to see     	=
-=     what needs to be done for each sourcetype.              	=
-=                                                           	=
-=     Index Requirements : index named 'google' is required 	=
-=     Index Time Extractions : Yes / Depends on sourcetype  	=
-=								=
-=								=
-=     Additional Requirements :                                 = 
-=		 Location Tracker App Visualiztion              =
-=								=
-=								=
-=								=
-=================================================================
+=========================================================================
+=     Google Timeline Viewer                              		=
+=     Author : Eric Six                                   		=
+=     Github : https://github.com/ericsix-splunk/google_timeline	=
+=     Datasource : Google Timeline Export { json format }   		=
+=     *** https://www.google.com/maps/timeline				=
+=     							    		=
+=     Notes :                                               		=
+=     App has examples using indexed extractions and       		=
+=     standard formatting with relevant Search Time Extractsions	=
+=     Review the props.conf to see what each sourcetype provides	=  
+=     and what needs to be done for each sourcetype.              	=
+=                                                           		=
+=     Index Requirements : index named 'google' is required 		=
+=     Index Time Extractions : Yes / Depends on sourcetype  		=
+=									=
+=									=
+=     Additional Requirements :                                 	=	 
+=		 Location Tracker App Visualiztion              	=
+=									=
+=									=
+=									=
+=========================================================================
 
 Additional Notes:
 
