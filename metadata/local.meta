@@ -40,3 +40,7 @@ modtime = 1470123595.646014000
 [views/google_locations_standard]
 version = 6.4.1
 modtime = 1468991057.805333000
+
+[props/json%3Agoogle%3Alocation]
+version = 6.4.2
+modtime = 1470191521.278604000
