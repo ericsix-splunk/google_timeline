@@ -1,5 +1,5 @@
 =========================================================================
-=     Google Timeline Viewer                              		=
+=     Google Timeline Viewer						= 
 =     Author : Eric Six                                   		=
 =     Github : https://github.com/ericsix-splunk/google_timeline	=
 =     Datasource : Google Timeline Export { json format }   		=
