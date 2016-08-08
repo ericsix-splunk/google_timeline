@@ -19,7 +19,6 @@
 =		 Location Tracker App Visualiztion              	=
 =									=
 =									=
-=									=
 =========================================================================
 
 Additional Notes:
